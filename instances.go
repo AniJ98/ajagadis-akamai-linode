@@ -163,7 +163,8 @@ type InstanceCreateOptions struct {
 	Booted   *bool `json:"booted,omitempty"`
 
 	// Deprecated: group is a deprecated property denoting a group label for the Linode.
-	Group string `json:"group,omitempty"`
+	Group string   `json:"group,omitempty"`
+	Ipv4  []string `json:"ipv4,omitempty"`
 }
 
 // InstanceCreatePlacementGroupOptions represents the placement group
