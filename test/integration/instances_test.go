@@ -626,11 +626,11 @@ func createInstanceWithReservedIP(
 
 	createOpts := linodego.InstanceCreateOptions{
 		Label:    "go-test-ins-reserved-ip-" + randLabel(),
-		Region:   "us-east",
+		Region:   "us-east", // You might want to make this configurable
 		Type:     "g6-nanode-1",
 		Booted:   linodego.Pointer(false),
 		Image:    "linode/alpine3.17",
-		RootPass: randPassword(),
+		RootPass: randPassword(), // Consider generating this dynamically
 		Interfaces: []linodego.InstanceConfigInterfaceCreateOptions{
 			{
 				Purpose:     linodego.InterfacePurposePublic,
