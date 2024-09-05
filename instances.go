@@ -167,6 +167,12 @@ type InstanceCreateOptions struct {
 	Ipv4  []string `json:"ipv4,omitempty"`
 }
 
+type InstanceReserveAdditionalIPOptions struct {
+	Type    string `json:"type"`
+	Public  bool   `json:"public"`
+	Address string `json:"address"`
+}
+
 // InstanceCreatePlacementGroupOptions represents the placement group
 // to create this Linode under.
 type InstanceCreatePlacementGroupOptions struct {
@@ -436,5 +442,11 @@ func (c *Client) simpleInstanceAction(ctx context.Context, action string, linode
 		c,
 		formatAPIPath("linode/instances/%d/%s", linodeID, action),
 	)
+	return err
+}
+
+func (c *Client) AddReservedIPToInstance(ctx context.Context, linodeID int, opts InstanceReserveAdditionalIPOptions) error {
+	endpoint := formatAPIPath("linode/instances/%d/ips", linodeID)
+	_, err := doPOSTRequest[InstanceReserveAdditionalIPOptions, any](ctx, c, endpoint, opts)
 	return err
 }
